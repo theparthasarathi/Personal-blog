@@ -1,17 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
-<body>
-    <h1>Personal Blog - Home</h1>
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Welcome to the Personal Blog</h2>
     <ul>
         {% for article in articles %}
-            <li><a href="/article/{{ article['id'] }}">{{ article['title'] }}</a></li>
+            {% if article.date_time %}
+                <li>
+                    <a href="{{ url_for('article', filename=article['date_time'].replace(' ', '_').replace(':', '-') + '.json') }}">
+                        {{ article.title }} - {{ article.date_time }}
+                    </a>
+                </li>
+            {% endif %}
+        {% else %}
+            <li>No articles available</li>
         {% endfor %}
     </ul>
-    <a href="/admin/add">Add New Article</a>
-</body>
-</html>
+{% endblock %}

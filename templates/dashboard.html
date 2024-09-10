@@ -1,23 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-</head>
-<body>
-    <h1>Admin Dashboard</h1>
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Dashboard</h2>
+    <a href="{{ url_for('add_article') }}">Add New Article</a>
     <ul>
         {% for article in articles %}
             <li>
-                <a href="/article/{{ article['id'] }}">{{ article['title'] }}</a>
-                <br>
-                <small>Published on: {{ article['date'] }}</small>
-                <a href="/admin/edit/{{ article['id'] }}">Edit</a>
+                <a href="{{ url_for('article', filename=article['date_time'].replace(' ', '_').replace(':', '-') + '.json') }}">{{ article.title }}</a>
+                <a href="{{ url_for('edit_article', filename=article['date_time'].replace(' ', '_').replace(':', '-') + '.json') }}">Edit</a>
+                <a href="{{ url_for('delete_article', filename=article['date_time'].replace(' ', '_').replace(':', '-') + '.json') }}" onclick="return confirm('Are you sure?')">Delete</a>
             </li>
         {% endfor %}
     </ul>
-    <a href="/admin/add">Add New Article</a><br>
-    <a href="/logout">Logout</a>
-</body>
-</html>
+{% endblock %}
