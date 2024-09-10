@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ article.title }}</title>
+    <title>{{ article['title'] }}</title>
 </head>
 <body>
-    <h1>{{ article.title }}</h1>
-    <p>{{ article.content }}</p>
-    <small>Published on {{ article.date }}</small>
-    <a href="{{ url_for('home') }}">Back to home</a>
+    <h1>{{ article['title'] }}</h1>
+    <p>{{ article['content'] }}</p>
+    <a href="/">Back to Home</a>
 </body>
 </html>
